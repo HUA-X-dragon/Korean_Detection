@@ -22,13 +22,11 @@ test/word_2.png kills
 test/word_3.png A
 ...
 ```
-2 修改--select_data,--batch_ratio和opt.character
+运行以下命令训练你的模型
 ```
-    parser.add_argument('--select_data', type=str, default='/', 
-                     help='select training data (default is MJ-ST, which means MJ and ST used as training data)') 
-    parser.add_argument('--batch_ratio', type=str, default='1', 
-                     help='assign ratio for each selected data in the batch') 
+CUDA_VISIBLE_DEVICES=0 python3 train.py \
+--train_data data/train --valid_data data/valid \
+--select_data MJ-ST --batch_ratio 0.5-0.5 \
+--Transformation TPS --FeatureExtraction ResNet --SequenceModeling BiLSTM --Prediction Attn
 ```
-```
-parser.add_argument('--character', type=str, default='0123456789abcdefghijklmnopqrstuvwxyz', help='character label') 
-```
+
